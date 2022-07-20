@@ -110,6 +110,15 @@ public class TopicsController {
 		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
 		form.setUser(userForm);
 
+		List<FavoriteForm> favorites = new ArrayList<FavoriteForm>();
+		      for (Favorite favoriteEntity : entity.getFavorites()) {
+		           FavoriteForm favorite = modelMapper.map(favoriteEntity, FavoriteForm.class);
+		           favorites.add(favorite);
+		           if (user.getUserId().equals(favoriteEntity.getUserId())) {
+		               form.setFavorite(favorite);
+		           }
+		       }
+		       form.setFavorites(favorites);
 		return form;
 	}
 
